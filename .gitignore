@@ -1,8 +1,12 @@
 # compiled output
-/dist
+*/dist
 */node_modules
 /out-tsc
 /bazel-out
+*.env
+*/postgres-data
+.angular
+back/public/images/*
 
 # Logs
 logs
