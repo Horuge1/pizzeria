@@ -26,7 +26,7 @@ export class PizzaService {
   }
 
   findOne(id: number) {
-    return this.pizzaRepository.findOneBy({id})
+    return this.pizzaRepository.findOne({relations:{toppings:true},where:{id}})
   }
 
   async update(id: number, updatePizzaDto: UpdatePizzaDto) {    
