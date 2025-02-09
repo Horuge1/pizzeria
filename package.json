@@ -1,0 +1,11 @@
+{
+  "name": "pizzeria",
+
+  "scripts": {
+    "install": "cd front && npm install && cd ../back && npm install",
+    "start:front":"cd front &&npm run start",
+    "start:back":"cd back&& npm run start:dev",
+    "test":"cd back&& npm run testdb:restart && npm run test:int"
+
+  }
+}
