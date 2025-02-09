@@ -1,9 +1,7 @@
 import { Express } from 'express';
 import {
-  Body,
   Controller,
   Post,
-  Req,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -25,7 +23,6 @@ export class AppController {
     }),
   )
   uploadFile(
-    @Req() req,
     @UploadedFile() file: Express.Multer.File,
   ) {
     return {imageName:file.filename}
