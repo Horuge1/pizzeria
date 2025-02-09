@@ -1,0 +1,34 @@
+<div class="grid">
+  @for(pizza of pizzaList();track pizza.id){
+
+  <button 
+    tuiAppearance="floating"
+    tuiCardLarge
+    type="button"
+    class="grid-item"
+    [style.cursor]="'pointer'"
+    [style.margin-top.rem]="1"
+    (click)="showDialog(pizza)"
+    >
+    <header class="card-header" tuiHeader>
+      <img class="card-image" [src]="pizza.imageUrl" />
+    </header>
+    <h2 tuiTitle="m">
+      {{ pizza.name }}
+      <span tuiSubtitle>${{ pizza.price }}</span>
+      <br />
+      <span tuiSubtitle>
+        <b>Ingredients: </b>
+        {{ pizza.ingredients }}
+      </span>
+      <span tuiSubtitle>
+        <b>Toppings: </b>
+        @for(topping of pizza.toppings; track topping){
+        {{ topping.name }}, }</span
+      >
+    </h2>
+  </button>
+  }
+
+</div>
+
