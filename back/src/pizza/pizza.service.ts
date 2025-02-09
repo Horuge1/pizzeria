@@ -31,7 +31,7 @@ export class PizzaService {
 
   async update(id: number, updatePizzaDto: UpdatePizzaDto) {    
     const pizza= await this.pizzaRepository.preload({id,...updatePizzaDto})
-    return this.pizzaRepository.save(pizza)
+    await this.pizzaRepository.save(pizza)
   }
 
   async remove(pizza:Pizza) {

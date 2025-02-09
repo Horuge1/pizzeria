@@ -56,9 +56,6 @@ describe('PizzaService', () => {
       await pizzaService.create(pizza);
       const createdPizza: Pizza = (await pizzaService.findAll())[0];
       expect(pizza.name).toBe(createdPizza.name);
-      console.log(createdPizza.toppings);
-      console.log(pizza.toppings);
-
       expect(createdPizza.toppings).toStrictEqual(pizza.toppings);
     });
   });
