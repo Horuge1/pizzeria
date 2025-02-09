@@ -1,0 +1,160 @@
+<div class="dialog-card">
+  <div class="small-grid">
+    <div>
+      @if(!showCreate()){
+      <button
+        (click)="showCreateForm()"
+        appearance="primary"
+        iconStart="@tui.plus"
+        tuiButton
+        type="button"
+      >
+        Add Topping
+      </button>
+      } @if(showCreate()){
+      <form [formGroup]="createForm">
+        <tui-textfield>
+          <label tuiLabel>Name</label>
+          <input
+            tui-input
+            formControlName="name"
+            tuiTextfield
+            tuiHintAppearance="error"
+            tuiHintDirection="left"
+            [tuiHint]="[] | tuiFieldErrorContent"
+            />
+        </tui-textfield>
+      </form>
+      }
+    </div>
+    <div>
+      @if(showCreate()&&createForm.valid){
+      <button
+        (click)="create()"
+        appearance="primary"
+        iconStart="@tui.check"
+        tuiIconButton
+        type="button"
+      >
+        Ok
+      </button>
+      } @if(showCreate()&&!createForm.valid){
+      <button
+        (click)="dismissCreateForm()"
+        appearance="primary"
+        iconStart="@tui.x"
+        tuiIconButton
+        type="button"
+      >
+        Ok
+      </button>
+      }
+    </div>
+  </div>
+
+  <br />
+  <table tuiTable size="l" [style.width]="'100%'">
+    <thead>
+      <tr>
+        <th tuiTh>Title</th>
+        <th tuiTh>Actions</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody>
+      @for(topping of toppings();track topping.id; let i= $index){
+
+      <tr>
+        <td tuiTd>
+          <div tuiCell="l">
+            @if(!showEdit()||elementToEdit()!==i){
+
+            <span tuiTitle>
+              {{ topping.name }}
+            </span>
+            } @if(showEdit()&&elementToEdit()===i){
+            <form [formGroup]="updateForm">
+              <tui-textfield>
+                <label tuiLabel>Name</label>
+                <input
+                  formControlName="name"
+                  tuiTextfield
+                  tuiHintAppearance="error"
+                  tuiHintDirection="left"
+                  [tuiHint]="[]|tuiFieldErrorContent"
+                />
+              </tui-textfield>
+            </form>
+            }
+          </div>
+        </td>
+        <td tuiTd [style.width]="'10%'">
+          <span tuiStatus>
+            @if(!showEdit()||elementToEdit()!==i){
+            <button
+              (click)="showEditForm(i)"
+              appearance="primary"
+              iconStart="@tui.pencil"
+              tuiIconButton
+              type="button"
+            >
+              Edit
+            </button>
+            } @if(showEdit()&&elementToEdit()===i&&updateForm.valid&&!originalValue()){
+            <button
+              (click)="update(topping.id)"
+              appearance="primary"
+              iconStart="@tui.check"
+              tuiIconButton
+              type="button"
+            >
+              Edit
+            </button>
+            } @if(showEdit()&&elementToEdit()===i&&(!updateForm.valid||originalValue())){
+            <button
+              (click)="dismissUpdateForm()"
+              appearance="primary"
+              iconStart="@tui.x"
+              tuiIconButton
+              type="button"
+            >
+              Edit
+            </button>
+            }
+            <button
+              (click)="openDeleteDialog(topping.id, template)"
+              appearance="primary-destructive"
+              iconStart="@tui.trash-2"
+              tuiIconButton
+              type="button"
+            >
+              More
+            </button>
+          </span>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<ng-template let-observer #template>
+  <div class="dialog">
+    <p>Are you sure you want to delete this topping?</p>
+  </div>
+  <button
+    (click)="confirmDelete(observer, true)"
+    appearance="secondary"
+    tuiButton
+    type="button"
+  >
+    Yes
+  </button>
+  <button
+    (click)="confirmDelete(observer, false)"
+    appearance="primary"
+    tuiButton
+    type="button"
+  >
+    No
+  </button>
+</ng-template>
