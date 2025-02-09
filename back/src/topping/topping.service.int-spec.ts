@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Topping } from './entities/topping.entity';
 import { ToppingModule } from './topping.module';
+import { Pizza } from 'src/pizza/entities/pizza.entity';
 
 describe('ToppingService', () => {
   let service: ToppingService;
@@ -26,6 +27,7 @@ describe('ToppingService', () => {
     }).compile();
     const dataSource = moduleRef.get(DataSource);
     await dataSource.createQueryBuilder().delete().from(Topping).execute();
+    await dataSource.createQueryBuilder().delete().from(Pizza).execute();
     service = moduleRef.get(ToppingService);
   });
 
