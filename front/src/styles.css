@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+.grid{
+  display: grid;
+  grid-template-columns: repeat(7,calc(100%/7));
+  column-gap: 16px;
+  align-content: center;
+}
+.card-header{
+  justify-content: center;
+}
+.card-image{
+  max-width: 220px;
+}
+
+.dialog-card {
+  max-height: min(2167px, max(80vh, 740px));
+  overflow: scroll;
+
+}
+.dialog-image {
+  max-width: 100%;
+  overflow: scroll;
+
+}
+.dialog-card::-webkit-scrollbar {
+  display: none;
+}
+@media (max-width: 1024px) {
+  .grid{
+    grid-template-columns: repeat(3,calc(100%/3));
+  }
+}
+@media (max-width: 768px) {
+  .grid{
+    grid-template-columns: repeat(2,calc(100%/2)) ;
+  }
+}
+@media (max-width: 480px) {
+  .grid{
+    grid-template-columns: auto;
+  }
+}
